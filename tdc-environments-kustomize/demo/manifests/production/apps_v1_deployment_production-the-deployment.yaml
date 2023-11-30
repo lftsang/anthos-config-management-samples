@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+      deployment: hello
+      org: acmeCorporation
+      variant: production
+  template:
+    metadata:
+      annotations:
+        note: Hello, I am production!
+      labels:
+        app: hello
+        deployment: hello
+        org: acmeCorporation
+        variant: production
+    spec:
+      containers:
+      - image: nginx
+        name: the-container

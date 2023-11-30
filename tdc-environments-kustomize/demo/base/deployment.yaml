@@ -12,6 +12,6 @@ spec:
       labels:
         deployment: hello
     spec:
-      containers:q
+      containers:
       - name: the-container
         image: nginx
