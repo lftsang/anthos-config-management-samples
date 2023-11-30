@@ -1,0 +1,10 @@
+namePrefix: production-           # add prefix of resource name
+commonLabels:                     # all resource will tag this label
+  variant: production
+  org: acmeCorporation
+commonAnnotations:                # all resource will add the Annotations
+  note: Hello, I am production!
+resources:                        # resources YAML location
+- ../../base
+patchesStrategicMerge:            # read the yaml file of setting for overwrite
+- deployment.yaml
