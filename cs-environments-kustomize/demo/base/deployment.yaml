@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-kuz-vcard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: vcard
+  template:
+    metadata:
+      labels:
+        deployment: vcard
+    spec:
+      imagePullSecrets:
+      - name: nexus-poc-regcred
+      dnsConfig:
+        nameservers:
+          - 10.50.0.52
+          - 10.20.0.74
+      containers:
+      - name: vcard-poc
+        image: src.tdc.org.hk:8083/docker-hosted/poc-gke-poc-vcard
+#        image: src.tdc.org.hk:8083/docker-hosted/poc-debug-image:latest
+        ports:
+         - containerPort: 5000
+        env:
+          - name: CLIENT_ID
+            value: cbf8656b-14a7-4f61-85e3-43ecf1452bbb
+          - name: CLIENT_KEY
+            value: d715473c-5443-42fb-b6f9-ff7685e298d3
+#      containers:
+#      - name: the-container
+#        image: src.tdc.org.hk:8083/docker-hosted/poc-debug-image:latest

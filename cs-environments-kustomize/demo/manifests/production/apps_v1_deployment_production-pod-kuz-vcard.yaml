@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: hello
+    org: acmeCorporation
+    variant: production
+  name: production-pod-kuz-vcard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+      deployment: vcard
+      org: acmeCorporation
+      variant: production
+  template:
+    metadata:
+      annotations:
+        note: Hello, I am production!
+      labels:
+        app: hello
+        deployment: vcard
+        org: acmeCorporation
+        variant: production
+    spec:
+      containers:
+      - env:
+        - name: CLIENT_ID
+          value: cbf8656b-14a7-4f61-85e3-43ecf1452bbb
+        - name: CLIENT_KEY
+          value: d715473c-5443-42fb-b6f9-ff7685e298d3
+        image: src.tdc.org.hk:8083/docker-hosted/poc-gke-poc-vcard
+        name: vcard-poc
+        ports:
+        - containerPort: 5000
+      dnsConfig:
+        nameservers:
+        - 10.50.0.52
+        - 10.20.0.74
+      imagePullSecrets:
+      - name: nexus-poc-regcred

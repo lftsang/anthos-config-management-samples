@@ -1,0 +1,10 @@
+namePrefix: uat-           # add prefix of resource name
+commonLabels:                     # all resource will tag this label
+  variant: uat
+  org: acmeUat
+commonAnnotations:                # all resource will add the Annotations
+  note: Hello, I am UAT!
+resources:                        # resources YAML location
+- ../../base
+patchesStrategicMerge:            # read the yaml file of setting for overwrite
+- deployment.yaml
